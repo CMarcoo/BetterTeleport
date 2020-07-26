@@ -47,6 +47,12 @@ public final class BetterTeleportCommand implements CommandExecutor {
         commandSender.sendMessage(color("&7> &c/bt come <player> <milliseconds>"));
     }
 
+    public static boolean requirePermission(final CommandSender sender, final String permission, final String denyMsg) {
+        if (sender.hasPermission(permission)) return true;
+        sender.sendMessage(color(denyMsg));
+        return false;
+    }
+
     @Override
     public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
 
@@ -62,9 +68,16 @@ public final class BetterTeleportCommand implements CommandExecutor {
             } else if (firstArg.equalsIgnoreCase("accept")) { //bt accept
                 teleportManager.acceptRequest(sender);
             } else if (firstArg.equalsIgnoreCase("deny")) { //bt deny
+                if (!requirePermission(sender, values.getTpaDenyPermission(), values.getTpaDenyDenyMessage()))
+                    return true;
                 teleportManager.denyRequest(sender);
+            } else if (firstArg.equalsIgnoreCase("reload")) { //bt reload
+                if (!requirePermission(sender, "betterteleport.reload", values.getAdminOnlyCommand()))
+                    return true;
+                final long then = System.currentTimeMillis();
+                values.updateValues();
+                sender.sendMessage(color("&8[&cBetterTeleport&8]&7: Config.yaml reloaded in &c&l" + (System.currentTimeMillis() - then) + "ms"));
             }
-
         } else if (count == 2) {
             final String firstArg = args[0];
             final String secondArg = args[1];
@@ -73,8 +86,12 @@ public final class BetterTeleportCommand implements CommandExecutor {
                 if (secondArg.equals("1")) help_1(sender); //bt help 1
                 else if (secondArg.equals("2")) help_2(sender); //bt help 2
             } else if (firstArg.equalsIgnoreCase("go")) {
+                if (!requirePermission(sender, values.getTeleportToOtherPermission(), values.getTeleportToOtherDenyMessage()))
+                    return true;
                 teleportManager.goRequest(sender, secondArg);
             } else if (firstArg.equalsIgnoreCase("come")) {
+                if (!requirePermission(sender, values.getTeleportToSelfPermission(), values.getTeleportToSelfDenyMessage()))
+                    return true;
                 teleportManager.comeRequest(sender, secondArg);
             }
 

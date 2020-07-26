@@ -1,8 +1,11 @@
 teleport:
   tpa-to-other-permission: 'betterteleport.teleport.other'
   tpa-to-self-permission: 'betterteleport.teleport.self'
+  tpa-deny-permission: 'betterteleport.teleport.deny'
+  admin-only-command: "&8[&cBetterTeleport&8]&7: Only administrators have access to this command."
   tpa-to-other-deny-message: "&8[&cBetterTeleport&8]&7: &c{PLAYER} &7you do not have permissions to teleport to others."
   tpa-to-self-deny-message: "&8[&cBetterTeleport&8]&7: &c{PLAYER} &7you do not have permissions to make other teleport to you."
+  tpa-deny-deny-message: "&8[&cBetterTeleport&8]&7: &c{PLAYER} &7you do not have permissions to deny teleport requests."
   tpa-to-other-message:
     - "&8[&cBetterTeleport&8]&7: &c{SENDER} &7wants to teleport to you."
     - "&7> You have &c&l{REQUEST_TIME} seconds&r&7 to accept this request!"
