@@ -50,7 +50,7 @@ public final class TeleportManager {
             return;
         }
         values.getTeleportToOtherRequestMessage().forEach(message -> {
-            target.sendMessage(BetterTeleportCommand.color(message.replace("{SENDER}", senderName).replace("{REQUEST_TIME}", String.valueOf(time))));
+            target.sendMessage(BetterTeleportCommand.color(message.replace("{SENDER}", senderName).replace("{REQUEST_TIME}", String.valueOf(time / 1000))));
         });
     }
 
@@ -62,7 +62,7 @@ public final class TeleportManager {
             return;
         }
         values.getTeleportToSelfRequestMessage().forEach(message -> {
-            target.sendMessage(BetterTeleportCommand.color(message.replace("{SENDER}", senderName).replace("{REQUEST_TIME}", String.valueOf(time))));
+            target.sendMessage(BetterTeleportCommand.color(message.replace("{SENDER}", senderName).replace("{REQUEST_TIME}", String.valueOf(time / 1000))));
         });
     }
 
@@ -80,7 +80,7 @@ public final class TeleportManager {
             return;
         }
 
-        final TeleportRequest teleportRequest = new TeleportRequest(currentTimeMillis(), values.getTeleportToOtherRequestTime(), playerSender, target);
+        final TeleportRequest teleportRequest = new TeleportRequest(currentTimeMillis(), values.getTeleportToOtherRequestTime(), playerSender, target, RequestType.OTHER);
         final TeleportSendEvent teleportSendEvent = new TeleportSendEvent(teleportRequest, RequestType.OTHER);
         plugin.getServer().getPluginManager().callEvent(teleportSendEvent);
 
@@ -105,7 +105,7 @@ public final class TeleportManager {
             return;
         }
 
-        final TeleportRequest teleportRequest = new TeleportRequest(currentTimeMillis(), values.getTeleportToOtherRequestTime(), playerSender, target);
+        final TeleportRequest teleportRequest = new TeleportRequest(currentTimeMillis(), values.getTeleportToOtherRequestTime(), playerSender, target, RequestType.OTHER);
         final TeleportDelayedSendEvent teleportDelayedSendEvent = new TeleportDelayedSendEvent(teleportRequest, RequestType.OTHER, delay);
         plugin.getServer().getPluginManager().callEvent(teleportDelayedSendEvent);
 
@@ -132,7 +132,7 @@ public final class TeleportManager {
             return;
         }
 
-        final TeleportRequest teleportRequest = new TeleportRequest(currentTimeMillis(), values.getTeleportToOtherRequestTime(), playerSender, target);
+        final TeleportRequest teleportRequest = new TeleportRequest(currentTimeMillis(), values.getTeleportToOtherRequestTime(), playerSender, target, RequestType.SELF);
         final TeleportSendEvent teleportSendEvent = new TeleportSendEvent(teleportRequest, RequestType.SELF);
         plugin.getServer().getPluginManager().callEvent(teleportSendEvent);
 
@@ -165,7 +165,7 @@ public final class TeleportManager {
             return;
         }
 
-        final TeleportRequest teleportRequest = new TeleportRequest(currentTimeMillis(), values.getTeleportToOtherRequestTime(), playerSender, target);
+        final TeleportRequest teleportRequest = new TeleportRequest(currentTimeMillis(), values.getTeleportToOtherRequestTime(), playerSender, target, RequestType.SELF);
         final TeleportDelayedSendEvent teleportDelayedSendEvent = new TeleportDelayedSendEvent(teleportRequest, RequestType.SELF, delay);
         plugin.getServer().getPluginManager().callEvent(teleportDelayedSendEvent);
 
@@ -209,8 +209,12 @@ public final class TeleportManager {
 
             if (teleportAcceptEvent.isCancelled()) return;
 
-            playerSender.sendMessage(BetterTeleportCommand.color(values.getRequestAccepted()));
-            originalSender.teleport(playerSender, PlayerTeleportEvent.TeleportCause.PLUGIN);
+            playerSender.sendMessage(BetterTeleportCommand.color(values.getRequestAccepted().replace("{REPLACE}", teleportRequest.getSender().getName())));
+            if (teleportRequest.getRequestType() == RequestType.OTHER) {
+                originalSender.teleport(playerSender, PlayerTeleportEvent.TeleportCause.PLUGIN);
+            } else if (teleportRequest.getRequestType() == RequestType.SELF) {
+                playerSender.teleport(originalSender, PlayerTeleportEvent.TeleportCause.PLUGIN);
+            }
             teleportRequests.remove(playerSender.getUniqueId());
         } else {
             playerSender.sendMessage(BetterTeleportCommand.color(values.getRequestTimeExpired()));
