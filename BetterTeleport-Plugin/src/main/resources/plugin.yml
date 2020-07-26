@@ -1,0 +1,9 @@
+name: 'BetterTeleport'
+version: ${project.version}
+main: me.thevipershow.betterteleport.BetterTeleport
+authors: [TheViperShow]
+description: 'A better teleport plugin for Spigot servers.'
+commands:
+  bt:
+    description: "§8[§c§8]&7: BetterTeleport's main command"
+    aliases: ["better-teleport", "btp"]

@@ -1,0 +1,28 @@
+teleport:
+  tpa-to-other-permission: 'betterteleport.teleport.other'
+  tpa-to-self-permission: 'betterteleport.teleport.self'
+  tpa-to-other-deny-message: "&8[&cBetterTeleport&8]&7: &c{PLAYER} &7you do not have permissions to teleport to others."
+  tpa-to-self-deny-message: "&8[&cBetterTeleport&8]&7: &c{PLAYER} &7you do not have permissions to make other teleport to you."
+  tpa-to-other-message:
+    - "&8[&cBetterTeleport&8]&7: &c{SENDER} &7wants to teleport to you."
+    - "&7> You have &c&l{REQUEST_TIME} seconds&r&7 to accept this request!"
+    - "&7> You can accept this request using '/bt accept' or '/bt deny' to reject it."
+  tpa-to-self-message:
+    - "&8[&cBetterTeleport&8]&7: &c{SENDER} wants you to teleport to them."
+    - "&7> You have &c&l{REQUEST_TIME} seconds&r&7 to accept this request!"
+    - "&7> You can accept this request using '/bt accept' or '/bt deny' to reject it."
+  tpa-to-other-time: 30000 # (these are milliseconds, they allow for greater precision)
+  tpa-to-self-time: 30000 # (these are milliseconds, they allow for greater precision)
+  append-clickable-tpa-request: true
+  clickable-tpa-request-text:
+    accept-message: "&l&8[&aACCEPT&8]"
+    deny-message: "&l&8[&aDENY&8]"
+  invalid-sender-message: "&8[&cBetterTeleport&8]&7: This message cannot be executed from here."
+  invalid-target-message: "&8[&cBetterTeleport&8]&7: &c{PLAYER} does not appear to be online."
+  target-quit-during-delayed-request: "&8[&cBetterTeleport&8]&7: &c{PLAYER} has left the game during your delay request."
+  sender-quit-during-request: "&8[&cBetterTeleport&8]&7: Unfortunately the sender of this teleport is no longer online."
+  teleport-to-self: "&8[&cBetterTeleport&8]&7: You cannot send a teleport request to yourself."
+  no-pending-requests: "&8[&cBetterTeleport&8]&7: You have no pending teleport requests."
+  request-time-exceeded: "&8[&cBetterTeleport&8]&7: The time to accept the request has finished."
+  request-accepted: "&8[&cBetterTeleport&8]&7: You accepted the request from &c{PLAYER}"
+  request-denied: "&8[&cBetterTeleport&8]&7: You denied the request from &c{PLAYER}"
