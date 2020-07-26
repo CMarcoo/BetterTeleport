@@ -18,7 +18,7 @@ teleport:
     accept-message: "&l&8[&aACCEPT&8]"
     deny-message: "&l&8[&aDENY&8]"
   invalid-sender-message: "&8[&cBetterTeleport&8]&7: This message cannot be executed from here."
-  invalid-target-message: "&8[&cBetterTeleport&8]&7: &c{PLAYER} does not appear to be online."
+  invalid-target-message: "&8[&cBetterTeleport&8]&7: &c{PLAYER} &7does not appear to be online."
   target-quit-during-delayed-request: "&8[&cBetterTeleport&8]&7: &c{PLAYER} has left the game during your delay request."
   sender-quit-during-request: "&8[&cBetterTeleport&8]&7: Unfortunately the sender of this teleport is no longer online."
   teleport-to-self: "&8[&cBetterTeleport&8]&7: You cannot send a teleport request to yourself."
