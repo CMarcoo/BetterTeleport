@@ -213,12 +213,13 @@ public final class TeleportManager {
 
             if (teleportAcceptEvent.isCancelled()) return;
 
-            playerSender.sendMessage(BetterTeleportCommand.color(values.getRequestAccepted().replace("{REPLACE}", teleportRequest.getSender().getName())));
+            playerSender.sendMessage(BetterTeleportCommand.color(values.getRequestAccepted().replace("{PLAYER}", teleportRequest.getSender().getName())));
             if (teleportRequest.getRequestType() == RequestType.OTHER) {
                 originalSender.teleport(playerSender, PlayerTeleportEvent.TeleportCause.PLUGIN);
             } else if (teleportRequest.getRequestType() == RequestType.SELF) {
                 playerSender.teleport(originalSender, PlayerTeleportEvent.TeleportCause.PLUGIN);
             }
+            originalSender.sendMessage(BetterTeleportCommand.color(values.getYourRequestAccepted().replace("{PLAYER}", playerSender.getName())));
             teleportRequests.remove(playerSender.getUniqueId());
         } else {
             playerSender.sendMessage(BetterTeleportCommand.color(values.getRequestTimeExpired()));
@@ -239,13 +240,23 @@ public final class TeleportManager {
             return;
         }
 
+
+        final TeleportRequest teleportRequest = lastRequestMatching.get();
         final TeleportCancelEvent teleportCancelEvent = new TeleportCancelEvent(lastRequestMatching.get(), CancelReason.PLAYER_DENY);
         plugin.getServer().getPluginManager().callEvent(teleportCancelEvent);
 
         if (teleportCancelEvent.isCancelled()) return;
 
+        final Player originalSender = teleportRequest.getSender();
+
+        if (originalSender.isOnline()) {
+            originalSender.sendMessage(BetterTeleportCommand.color(values.getYourRequestDenied().replace("{PLAYER}", playerSender.getName())));
+        }
+
+        playerSender.sendMessage(BetterTeleportCommand.color(values.getRequestDenied().replace("{PLAYER}", originalSender.getName())));
+
         teleportRequests.remove(playerSender.getUniqueId());
-        playerSender.sendMessage(BetterTeleportCommand.color(values.getRequestDenied()));
+
     }
 
 }

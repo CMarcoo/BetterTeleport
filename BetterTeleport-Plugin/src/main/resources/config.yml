@@ -30,3 +30,5 @@ teleport:
   request-accepted: "&8[&cBetterTeleport&8]&7: You accepted the request from &c{PLAYER}"
   request-denied: "&8[&cBetterTeleport&8]&7: You denied the request from &c{PLAYER}"
   request-sent: "&8[&cBetterTeleport&8]&7: Request successfully sent to &c{PLAYER}"
+  your-request-denied: "&8[&cBetterTeleport&8]&7: {PLAYER} has denied your teleport request."
+  your-request-accepted: "&8[&cBetterTeleport&8]&7: {PLAYER} has accepted your teleport request."

@@ -6,7 +6,7 @@
 
     <groupId>me.thevipershow</groupId>
     <artifactId>BetterTeleport</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.1-BETA</version>
     <modules>
         <module>BetterTeleport-API</module>
         <module>BetterTeleport-Plugin</module>
