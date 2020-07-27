@@ -29,3 +29,4 @@ teleport:
   request-time-exceeded: "&8[&cBetterTeleport&8]&7: The time to accept the request has finished."
   request-accepted: "&8[&cBetterTeleport&8]&7: You accepted the request from &c{PLAYER}"
   request-denied: "&8[&cBetterTeleport&8]&7: You denied the request from &c{PLAYER}"
+  request-sent: "&8[&cBetterTeleport&8]&7: Request successfully sent to &c{PLAYER}"

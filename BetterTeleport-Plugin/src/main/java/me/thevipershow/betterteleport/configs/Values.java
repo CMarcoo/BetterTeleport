@@ -45,6 +45,7 @@ public final class Values {
     private String tpaDenyDenyMessage = null;
     private String tpaDenyPermission = null;
     private String adminOnlyCommand = null;
+    private String requestSent = null;
 
     public final void updateValues() {
         plugin.reloadConfig();
@@ -72,6 +73,7 @@ public final class Values {
         tpaDenyDenyMessage = c.getString(BASE_NODE + "tpa-deny-deny-message");
         tpaDenyPermission = c.getString(BASE_NODE + "tpa-deny-permission");
         adminOnlyCommand = c.getString(BASE_NODE + "admin-only-command");
+        requestSent = c.getString(BASE_NODE + "request-sent");
     }
 
     public String getTeleportToOtherPermission() {
@@ -164,5 +166,9 @@ public final class Values {
 
     public String getAdminOnlyCommand() {
         return adminOnlyCommand;
+    }
+
+    public String getRequestSent() {
+        return requestSent;
     }
 }

@@ -87,6 +87,7 @@ public final class TeleportManager {
         if (teleportSendEvent.isCancelled()) return; // Some third party plugin cancelled the request ^
 
         sendGoRequestMessage(target, playerSender.getName(), teleportRequest.getMaxAcceptTime(), values);
+        sender.sendMessage(BetterTeleportCommand.color(values.getRequestSent().replace("{PLAYER}", targetArgument)));
         teleportRequests.put(target.getUniqueId(), teleportRequest);
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> teleportRequests.remove(target.getUniqueId()), teleportRequest.getMaxAcceptTime() / 1000 * 20);
     }
@@ -112,6 +113,7 @@ public final class TeleportManager {
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
             if (!teleportDelayedSendEvent.isCancelled()) {
                 sendGoRequestMessage(target, playerSender.getName(), teleportRequest.getMaxAcceptTime(), values);
+                sender.sendMessage(BetterTeleportCommand.color(values.getRequestSent().replace("{PLAYER}", targetArgument)));
                 teleportRequests.put(target.getUniqueId(), teleportRequest);
                 plugin.getServer().getScheduler().runTaskLater(plugin, () -> teleportRequests.remove(target.getUniqueId()), teleportRequest.getMaxAcceptTime() / 1000 * 20);
             }
@@ -139,6 +141,7 @@ public final class TeleportManager {
         if (teleportSendEvent.isCancelled()) return;
 
         sendComeRequestMessage(target, playerSender.getName(), teleportRequest.getMaxAcceptTime(), values);
+        sender.sendMessage(BetterTeleportCommand.color(values.getRequestSent().replace("{PLAYER}", targetArgument)));
         teleportRequests.put(target.getUniqueId(), teleportRequest);
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> teleportRequests.remove(target.getUniqueId()), teleportRequest.getMaxAcceptTime() / 1000 * 20);
     }
@@ -172,6 +175,7 @@ public final class TeleportManager {
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
             if (!teleportDelayedSendEvent.isCancelled()) {
                 sendGoRequestMessage(target, playerSender.getName(), teleportRequest.getMaxAcceptTime(), values);
+                sender.sendMessage(BetterTeleportCommand.color(values.getRequestSent().replace("{PLAYER}", targetArgument)));
                 teleportRequests.put(target.getUniqueId(), teleportRequest);
                 plugin.getServer().getScheduler().runTaskLater(plugin, () -> teleportRequests.remove(target.getUniqueId()), teleportRequest.getMaxAcceptTime() / 1000 * 20);
             }
